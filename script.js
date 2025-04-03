@@ -74,7 +74,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Scroll animations for sections
-const sections = document.querySelectorAll('section');
+const allSections = document.querySelectorAll('section');
 const observerOptions = {
     threshold: 0.1
 };
@@ -87,17 +87,17 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-sections.forEach(section => {
+allSections.forEach(section => {
     observer.observe(section);
 });
 
 // Active class for navigation links based on scroll position
-const navLinks = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('section');
+const navigationLinks = document.querySelectorAll('.nav-links a');
+const scrollSections = document.querySelectorAll('section');
 
 window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(section => {
+    scrollSections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         if (pageYOffset >= sectionTop - sectionHeight / 3) {
@@ -105,7 +105,7 @@ window.addEventListener('scroll', () => {
         }
     });
 
-    navLinks.forEach(link => {
+    navigationLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').slice(1) === current) {
             link.classList.add('active');
@@ -201,4 +201,29 @@ const hashtagContainer = document.querySelector('.hashtag-container');
 if (hashtagContainer) {
     const hashtags = hashtagContainer.innerHTML;
     hashtagContainer.innerHTML = hashtags + hashtags; // Duplicate hashtags for seamless scrolling
-} 
+}
+
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileNavLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    mobileNavLinks.classList.toggle('active');
+});
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNavLinks.classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+        menuToggle.classList.remove('active');
+        mobileNavLinks.classList.remove('active');
+    }
+}); 

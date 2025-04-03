@@ -888,17 +888,18 @@ section:hover::before {
     font-weight: bold;
     color: rgba(255, 255, 255, 0.1);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    width: max-content;
 }
 
 .running-text-content.horizontal {
     top: 20%;
-    animation: runHorizontal 20s linear infinite;
+    animation: runHorizontal 30s linear infinite;
 }
 
 .running-text-content.diagonal {
     top: 60%;
     transform: rotate(-15deg);
-    animation: runDiagonal 25s linear infinite;
+    animation: runDiagonal 35s linear infinite;
 }
 
 .running-text-content span {
@@ -908,7 +909,7 @@ section:hover::before {
 
 @keyframes runHorizontal {
     0% {
-        transform: translateX(100%);
+        transform: translateX(100vw);
     }
     100% {
         transform: translateX(-100%);
@@ -917,7 +918,7 @@ section:hover::before {
 
 @keyframes runDiagonal {
     0% {
-        transform: translateX(100%) rotate(-15deg);
+        transform: translateX(100vw) rotate(-15deg);
     }
     100% {
         transform: translateX(-100%) rotate(-15deg);
